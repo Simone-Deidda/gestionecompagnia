@@ -53,6 +53,13 @@ public class TestGestioneCompagnia {
 			System.out.println("Nella tabella Compagnia ci sono " + compagniaDAOInstance.list().size() + " elementi.");
 			System.out.println("Nella tabella Impiegato ci sono " + impiegatoDAOInstance.list().size() + " elementi.");
 			
+			testFindCompagnieByDataAssunzione(compagniaDAOInstance, impiegatoDAOInstance);
+			System.out.println("Nella tabella Compagnia ci sono " + compagniaDAOInstance.list().size() + " elementi.");
+			testFindCompagnieByRagioneSociale(compagniaDAOInstance);
+			System.out.println("Nella tabella Compagnia ci sono " + compagniaDAOInstance.list().size() + " elementi.");
+			testFindCompagnieByCodiceFiscaleImpiegato(compagniaDAOInstance, impiegatoDAOInstance);
+			System.out.println("Nella tabella Compagnia ci sono " + compagniaDAOInstance.list().size() + " elementi.");
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -222,5 +229,57 @@ public class TestGestioneCompagnia {
 		}
 		
 		System.out.println("<<<<<<testFindCompagniaByExample: fine>>>>>>\n");
+	}
+	
+	public static void testFindCompagniaById(ImpiegatoDAO impiegatoDAOInstance) throws Exception {
+		System.out.println("\n<<<<<<testFindCompagniaById: inizio>>>>>>");
+		
+		Impiegato primoImpiegato = impiegatoDAOInstance.list().get(0);
+		
+		Impiegato impiegatoRicercato = impiegatoDAOInstance.get(primoImpiegato.getId());
+		if (!impiegatoRicercato.equals(primoImpiegato))
+			throw new RuntimeException("testFindCompagniaById : FAILED");
+		else System.out.println("testFindCompagniaById: SUCCESS");
+		
+		System.out.println("<<<<<<testFindCompagniaById: fine>>>>>>\n");
+	}
+	
+	public static void testFindCompagnieByDataAssunzione(CompagniaDAO compagniaDAOInstance, ImpiegatoDAO impiegatoDAOInstance) throws Exception {
+		System.out.println("\n<<<<<<testFindCompagnieByDataAssunzione: inizio>>>>>>");
+		
+		Impiegato primoImpiegato = impiegatoDAOInstance.list().get(0);
+		
+		List<Compagnia> listaCompagniaTrovate = compagniaDAOInstance.findAllByDataAssunzione(primoImpiegato.getDataAssunzione());
+		if (listaCompagniaTrovate.size() < 1)
+			throw new RuntimeException("testFindCompagnieByDataAssunzione : FAILED");
+		else System.out.println("testFindCompagnieByDataAssunzione: SUCCESS");
+		
+		System.out.println("<<<<<<testFindCompagnieByDataAssunzione: fine>>>>>>\n");
+	}
+	
+	public static void testFindCompagnieByRagioneSociale(CompagniaDAO compagniaDAOInstance) throws Exception {
+		System.out.println("\n<<<<<<testFindCompagnieByRagioneSociale: inizio>>>>>>");
+		
+		Compagnia primaCompagnia = compagniaDAOInstance.list().get(0);
+		
+		List<Compagnia> listaCompagniaTrovate = compagniaDAOInstance.findAllByRagioneSociale(primaCompagnia.getRagioneSociale());
+		if (listaCompagniaTrovate.size() < 1)
+			throw new RuntimeException("testFindCompagnieByRagioneSociale : FAILED");
+		else System.out.println("testFindCompagnieByRagioneSociale: SUCCESS");
+		
+		System.out.println("<<<<<<testFindCompagnieByRagioneSociale: fine>>>>>>\n");
+	}
+	
+	public static void testFindCompagnieByCodiceFiscaleImpiegato(CompagniaDAO compagniaDAOInstance, ImpiegatoDAO impiegatoDAOInstance) throws Exception {
+		System.out.println("\n<<<<<<testFindCompagnieByCodiceFiscaleImpiegato: inizio>>>>>>");
+		
+		Impiegato primoImpiegato = impiegatoDAOInstance.list().get(0);
+		
+		List<Compagnia> listaCompagniaTrovate = compagniaDAOInstance.findAllByCodiceFiscaleImpiegato(primoImpiegato.getCodiceFiscale());
+		if (listaCompagniaTrovate.size() < 1)
+			throw new RuntimeException("testFindCompagnieByCodiceFiscaleImpiegato : FAILED");
+		else System.out.println("testFindCompagnieByCodiceFiscaleImpiegato: SUCCESS");
+		
+		System.out.println("<<<<<<testFindCompagnieByCodiceFiscaleImpiegato: fine>>>>>>\n");
 	}
 }
