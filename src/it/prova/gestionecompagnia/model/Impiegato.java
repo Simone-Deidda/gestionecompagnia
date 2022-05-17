@@ -10,7 +10,11 @@ public class Impiegato {
 	private String codiceFiscale;
 	private Date dataNascita;
 	private Date dataAssunzione;
-	
+	private Compagnia compagnia;
+
+	public Impiegato() {
+	}
+
 	public Impiegato(String nome, String cognome, String codiceFiscale) {
 		this.nome = nome;
 		this.cognome = cognome;
@@ -73,6 +77,14 @@ public class Impiegato {
 		this.dataAssunzione = dataAssunzione;
 	}
 
+	public Compagnia getCompagnia() {
+		return compagnia;
+	}
+
+	public void setCompagnia(Compagnia compagnia) {
+		this.compagnia = compagnia;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(codiceFiscale, cognome, dataAssunzione, dataNascita, id, nome);
@@ -98,7 +110,5 @@ public class Impiegato {
 		return "Impiegato [id=" + id + ", nome=" + nome + ", cognome=" + cognome + ", codiceFiscale=" + codiceFiscale
 				+ ", dataNascita=" + dataNascita + ", dataAssunzione=" + dataAssunzione + "]";
 	}
-	
-	
-	
+
 }
