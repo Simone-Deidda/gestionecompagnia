@@ -19,11 +19,10 @@ public class Compagnia {
 		this.fatturatoAnnuo = fatturatoAnnuo;
 	}
 
-	public Compagnia(String ragioneSociale, int fatturatoAnnuo, Date dataFondazione, List<Impiegato> listaImpiegati) {
+	public Compagnia(String ragioneSociale, int fatturatoAnnuo, Date dataFondazione) {
 		this.ragioneSociale = ragioneSociale;
 		this.fatturatoAnnuo = fatturatoAnnuo;
 		this.dataFondazione = dataFondazione;
-		this.listaImpiegati = listaImpiegati;
 	}
 
 	public Long getId() {
